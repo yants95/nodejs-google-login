@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-google-login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "tsx": "^3.11.0",
+    "typescript": "^4.8.4"
+  }
+}
