@@ -26,4 +26,12 @@ export class GoogleAPI {
     const { tokens } = await this.google.getToken(code)
     return tokens.id_token
   }
+
+  async decodeToken (token: string): Promise<any> {
+    const userData = await this.google.verifyIdToken({
+      idToken: token,
+      audience: env.google.clientId
+    })
+    return userData
+  }
 }

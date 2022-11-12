@@ -1,4 +1,4 @@
-import { env, dir } from './config'
+import { env, dir } from '@/config/env'
 import { DataSource } from 'typeorm'
 
 export const mysqlSource = new DataSource({

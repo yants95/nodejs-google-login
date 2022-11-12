@@ -1,17 +1,22 @@
-import { UserEntity } from '@/infra/entities'
-import { mysqlSource } from '@/mysql-connection'
-import { Repository } from 'typeorm'
+import { prisma } from '@/db'
 
 export class UsersRepository {
-  private readonly model: Repository<UserEntity>
+  private readonly user
 
   constructor () {
-    this.model = mysqlSource.getRepository(UserEntity)
+    this.user = prisma.user
   }
 
-  async findByGoogleId (googleId: string): Promise<UserEntity | null> {
-    return this.model.findOne({
-      where: { googleId }
+  async create (params: any): Promise<any> {
+    console.log('PARAMS', params)
+    const user = await this.user.create({
+      data: {
+        name: params.name,
+        email: params.email,
+        picture_url: params.picture
+      }
     })
+    console.log('user', user)
+    return user
   }
 }
