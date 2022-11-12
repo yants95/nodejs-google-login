@@ -1,22 +1,33 @@
 {
   "name": "nodejs-google-login",
   "version": "1.0.0",
-  "description": "",
+  "description": "Implementing login with Google",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["nodejs", "googleapis", "integration"],
+  "author": "Yan Soares",
   "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "googleapis": "^109.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "typeorm": "^0.3.10"
+  },
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "eslint": "^7.0.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-es": "^4.1.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.0.0",
-    "tsx": "^3.11.0",
+    "tsx": "^3.12.0",
     "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
