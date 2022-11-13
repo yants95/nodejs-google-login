@@ -24,7 +24,11 @@ export class GoogleAPI {
 
   async getToken (code: string): Promise<any> {
     const { tokens } = await this.google.getToken(code)
-    return tokens.id_token
+    const { id_token, access_token } = tokens
+    return {
+      id_token,
+      access_token
+    }
   }
 
   async decodeToken (token: string): Promise<any> {
@@ -33,5 +37,11 @@ export class GoogleAPI {
       audience: env.google.clientId
     })
     return userData
+  }
+
+  async refreshToken (): Promise<string | undefined | null> {
+    const { credentials } = await this.google.refreshAccessToken()
+    const { access_token } = credentials
+    return access_token
   }
 }
