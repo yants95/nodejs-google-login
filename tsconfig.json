@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDirs": ["src"],
+    "rootDirs": ["src", "tests"],
     "target": "es2021",
     "sourceMap": true,
     "skipLibCheck": true,
@@ -10,13 +10,14 @@
     "module": "commonjs",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "#/*": ["tests/*"]
     },
     "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
   },
-  "include": ["src"]
+  "include": ["src", "tests"]
 }

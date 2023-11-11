@@ -1,17 +1,18 @@
-import { GoogleAPI } from '@/apis'
-import { UsersRepository } from '@/infra/repositories'
+import { randomUUID } from "node:crypto";
+
+import { UsersRepository } from "@/db/pg-user-repository";
+
+import { hash } from "bcryptjs";
 
 export class CreateUserService {
-  private readonly googleAPI: GoogleAPI
-  private readonly usersRepository: UsersRepository
+  constructor(private readonly usersRepository: UsersRepository) {}
 
-  constructor () {
-    this.usersRepository = new UsersRepository()
-    this.googleAPI = new GoogleAPI()
-  }
-
-  async execute (token: string): Promise<any> {
-    const userData = await this.googleAPI.decodeToken(token)
-    await this.usersRepository.create(userData.payload)
+  async execute(data: any): Promise<any> {
+    const user = {
+      ...data,
+      id: randomUUID(),
+      password: await hash(data.password, 10),
+    };
+    await this.usersRepository.save(user);
   }
 }

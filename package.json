@@ -1,41 +1,48 @@
 {
   "name": "nodejs-google-login",
   "version": "1.0.0",
+  "author": "Yan Soares",
+  "license": "ISC",
   "description": "Implementing login with Google",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "mg:revert": "npm run typeorm -- migration:revert -d ./src/pg-connection.ts",
+    "mg:run": "npm run typeorm -- migration:run -d ./src/pg-connection.ts",
+    "mg:create": "sh -c 'npm run typeorm -- migration:create ./src/db/migrations/$0'"
   },
   "keywords": [
     "nodejs",
     "googleapis",
     "integration"
   ],
-  "author": "Yan Soares",
-  "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^4.6.1",
-    "dotenv": "^16.0.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "googleapis": "^109.0.1",
     "jsonwebtoken": "^8.5.1",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "mongoose": "^8.0.0",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.14",
     "@types/module-alias": "^2.0.1",
-    "@types/node": "^18.11.9",
-    "eslint": "^7.0.0",
-    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^36.1.0",
     "eslint-plugin-es": "^4.1.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-import-helpers": "^1.3.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.0.0",
-    "prisma": "^4.6.1",
-    "tsx": "^3.12.0",
-    "typescript": "^4.6.3"
-  },
-  "engines": {
-    "node": "16.x"
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "ts-node": "^10.9.1",
+    "tsx": "^4.1.1"
   }
 }
