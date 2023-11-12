@@ -1,10 +1,12 @@
 import "reflect-metadata";
 
 import { GoogleAPI } from "@/apis";
-import { CreateUserController, RefreshTokenController } from "@/controllers";
+import { CreateUserController } from "@/controllers";
+import { CreateUserGoogleController } from "@/controllers/create-user-google-controller";
 import { UsersRepository } from "@/db/pg-user-repository";
 import { db } from "@/pg-connection";
 import { CreateUserService } from "@/services";
+import { CreateUserGoogleService } from "@/services/create-user-google-service";
 
 import express, { Request, Response, json } from "express";
 
@@ -13,7 +15,9 @@ const google = new GoogleAPI();
 const userRepository = new UsersRepository();
 const userService = new CreateUserService(userRepository);
 const userController = new CreateUserController(userService);
-const refreshTokenController = new RefreshTokenController();
+
+const userGoogleService = new CreateUserGoogleService(google);
+const userGoogleController = new CreateUserGoogleController(userGoogleService);
 
 app.use(json());
 
@@ -21,27 +25,19 @@ app.post("/users", async (req: Request, res: Response) =>
   userController.handle(req, res),
 );
 
-// app.get("/auth/google", async (req, res) => {
-//   const url = await google.generateAuthUrl();
-//   return res.json({ url });
-// });
+app.get("/auth/google", async (req, res) => {
+  const url = await google.generateAuthUrl();
+  return res.json({ url });
+});
 
-// app.get("/auth/google/callback", async (req, res) => {
-//   const { code } = req.query;
-//   if (code) {
-//     const { id_token, access_token } = await google.getToken(String(code));
-//     return res.json({ id_token, access_token });
-//   }
-// });
+app.get("/login/google", async (req, res) =>
+  userGoogleController.handle(req, res),
+);
 
 // app.post("/auth/google/user-data", async (req, res) => {
 //   const userData = await google.decodeToken(req.body.token);
 //   return res.json(userData);
 // });
-
-// app.get("/refresh-token", async (req, res) =>
-//   refreshTokenController.handle(req, res),
-// );
 
 db.initialize()
   .then(() =>

@@ -25,7 +25,7 @@ export class CreateUsersTable1699733798441 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: "google_id",
+            name: "provider",
             type: "varchar",
             isNullable: true,
           },
